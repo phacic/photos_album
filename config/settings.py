@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -129,9 +131,24 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # this is the relative browser URL to be used when accessing our media files in the browser.
-# For example MEDIA_URL = "media/"
 MEDIA_URL = '/media/'
 
 # this is the absolute path to the folder that will hold our user uploads.
 # For example MEDIA_ROOT = "/User/Timmy/Sites/Pho/root/media/".
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+#
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',  # for browsable api
+        'rest_framework.authentication.BasicAuthentication',  # for browsable api
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+    'UPDATE_LAST_LOGIN': True,
+}
+

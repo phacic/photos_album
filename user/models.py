@@ -1,3 +1,7 @@
-from django.db import models
+# will use django user model
 
-# Create your models here.
+from django.contrib.auth.models import User
+
+
+# make email field unique
+User._meta.get_field('email')._unique = True
