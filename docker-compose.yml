@@ -9,25 +9,6 @@ volumes:
   rabbit-data:
 
 services:
-  web:
-    build: .
-    command: bash -c "sleep 5s && python manage.py runserver 0.0.0.0:8000"
-    environment:
-      DB_NAME: 'photos_db'
-      DB_USER: 'user'
-      DB_PASSWORD: 'secret0'
-      MAX_IMAGE_SIZE: 10
-    expose:
-      - 8000
-    ports:
-      - "5333:8000"
-    volumes:
-      - .:/app/
-    networks:
-      - backend
-    depends_on:
-      - db
-
   db:
     image: mysql:8.0.26
     command: --default-authentication-plugin=mysql_native_password
@@ -47,11 +28,48 @@ services:
     networks:
       - backend
 
-#  rabbitmq:
-#    image: rabbitmq:3.7-management-alpine
-#    expose:
-#      - "5672"
-#    networks:
-#      - backend
-#    volumes:
-#      - rabbit-data:/var/lib/rabbitmq
+  rabbitmq:
+    image: rabbitmq:3.7-management-alpine
+    expose:
+      - "5672"
+    networks:
+      - backend
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+
+
+  web:
+    build: .
+    command: bash -c "sleep 5s && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DB_NAME: 'photos_db'
+      DB_USER: 'user'
+      DB_PASSWORD: 'secret0'
+      MAX_IMAGE_SIZE: 10
+    expose:
+      - 8000
+    ports:
+      - "5333:8000"
+    volumes:
+      - .:/app/
+    networks:
+      - backend
+    depends_on:
+      - db
+      - rabbitmq
+
+  celery:
+    build: .
+    command: bash -c "sleep 5s && celery -A config worker -l INFO"
+    environment:
+      DB_NAME: 'photos_db'
+      DB_USER: 'user'
+      DB_PASSWORD: 'secret0'
+      MAX_IMAGE_SIZE: 10
+    volumes:
+      - .:/app/
+    networks:
+      - backend
+    depends_on:
+      - db
+      - rabbitmq

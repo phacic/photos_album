@@ -17,7 +17,8 @@ class PhotoSerializer(serializers.ModelSerializer):
         """ validate user owes albums """
 
         for album in albums:
-            if album.user_id != self.context.request.user.id:
+            request = self.context.get('request')
+            if album.user_id != request.user.id:
                 raise ValidationError("User must owe assigned album.")
         return albums
 

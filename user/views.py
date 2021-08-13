@@ -1,21 +1,24 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractUser
 from rest_framework import viewsets, generics
 from rest_framework import permissions
 from . import permissions as user_permissions
 
 from .serializers import (UserSerializer, SignUpSerializer)
 
-User = get_user_model()
+User: AbstractUser = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     users view to list, get and update users
     """
-    queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
     http_method_names = ('put', 'patch', 'get')
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
 
     def update(self, request, *args, **kwargs):
         # only owners of account should be allow to update
@@ -24,7 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         # owner or admin can delete account
-        self.permission_classes = (user_permissions.IsAccountOwnerOrAdmin,)
+        self.permission_classes = (user_permissions.IsAccountOwner,)
         return super().destroy(request, *args, **kwargs)
 
 
