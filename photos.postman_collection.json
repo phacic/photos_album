@@ -436,6 +436,45 @@
 				}
 			},
 			"response": []
+		},
+				{
+			"name": "Get image at size",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5333/photos/1/get_image/?size=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"photos",
+						"1",
+						"get_image",
+						""
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "100",
+							"description": "required final image size"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

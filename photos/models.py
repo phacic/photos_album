@@ -1,8 +1,9 @@
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.files.base import File
-from django.conf import settings
-from rest_framework.exceptions import ValidationError
 from django.db import models
+from rest_framework.exceptions import ValidationError
+from sorl.thumbnail import ImageField
 
 User = get_user_model()
 
@@ -27,7 +28,7 @@ class Photo(models.Model):
     # user who created the image
     user = models.ForeignKey(User, related_name='photos', on_delete=models.CASCADE)
     # the image itself
-    image = models.ImageField(upload_to='images/photos/%Y/%m/%d', validators=[validate_image_size])
+    image = ImageField(upload_to='images/photos/%Y/%m/%d', validators=[validate_image_size])
     # created and updated times
     create_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
