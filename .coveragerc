@@ -1,0 +1,4 @@
+[run]
+omit = *migrations*, *test*, *settings*, manage.py, *dev*, *pytest-runner.py, *wsgi.py, *__init__*, *admin.py,
+        *scripts.py, *apps.py
+branch = True

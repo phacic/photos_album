@@ -14,16 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from user import views as user_views
+from photos import views as photo_views
 
 # create router and register views
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=True)
 
 router.register('users', user_views.UserViewSet, basename='user')
+router.register('photos', photo_views.PhotoViewSet, basename='photo')
+router.register('albums', photo_views.AlbumViewSet, basename='album')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,3 +44,7 @@ urlpatterns = [
 
     path('', include(router.urls))
 ]
+
+# serve media in dev
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

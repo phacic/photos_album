@@ -2,7 +2,6 @@ import json
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from rest_framework import status
-# from rest_framework.reverse import reverse
 from django.urls import reverse
 
 import pytest

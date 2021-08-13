@@ -16,6 +16,7 @@ services:
       DB_NAME: 'photos_db'
       DB_USER: 'user'
       DB_PASSWORD: 'secret0'
+      MAX_IMAGE_SIZE: 10
     expose:
       - 8000
     ports:

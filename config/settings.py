@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'user'
+    'user',
+    'photos'
 ]
 
 MIDDLEWARE = [
@@ -151,4 +152,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
     'UPDATE_LAST_LOGIN': True,
 }
+
+# maximum image size to accept in MB
+MAX_IMAGE_SIZE = os.environ.get('MAX_IMAGE_SIZE', 20)
 
