@@ -24,7 +24,7 @@ from user import views as user_views
 from photos import views as photo_views
 
 # create router and register views
-router = routers.DefaultRouter(trailing_slash=True)
+router = routers.DefaultRouter(trailing_slash=False)
 
 router.register('users', user_views.UserViewSet, basename='user')
 router.register('photos', photo_views.PhotoViewSet, basename='photo')

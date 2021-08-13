@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "4c500b50-4396-46c4-9f40-6da2a335cd73",
+		"name": "photos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Amy",
+							"description": "First name of the user",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "Adams",
+							"description": "Last name of the user",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "amy@example.com",
+							"description": "User email",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "amyadams",
+							"description": "desired username",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "examples",
+							"description": "user password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/sign-up",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "kofi1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "examples",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5333/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Current User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5333/users",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Current User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "first_name",
+							"value": "Sampson",
+							"type": "text"
+						},
+						{
+							"key": "Last_name",
+							"value": "Job",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "samjob",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "sam@example.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/users/2/",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"users",
+						"2",
+						""
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Sampson",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Album",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "",
+							"description": "album title",
+							"type": "text"
+						},
+						{
+							"key": "photos",
+							"value": "[1, 2, 3]",
+							"description": "photo ids to assign to album",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/albums",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Album",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5333/albums/1/",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"albums",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Photo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/photos",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Photo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/photos/1/",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"photos",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add images to Album",
+			"request": {
+				"auth": {
+					"type": "basic"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photos",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/albums/1/add_photos",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"albums",
+						"1",
+						"add_photos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove images from Album",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photos",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5333/albums/1/remove_photos",
+					"host": [
+						"localhost"
+					],
+					"port": "5333",
+					"path": [
+						"albums",
+						"1",
+						"remove_photos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
