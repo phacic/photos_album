@@ -1,4 +1,6 @@
 from typing import Generator
+import tempfile
+from PIL import Image
 import pytest
 from faker import Faker
 from django.contrib.auth.models import AbstractUser
@@ -59,3 +61,17 @@ def user_someone(create_user) -> AbstractUser:
                           first_name=fake.first_name(), last_name=fake.last_name())
 
     return someone
+
+
+@pytest.fixture()
+def create_image():
+    """ image file factory """
+    with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tf:
+        image = Image.new("RGB", (100, 100), color="#ddd")
+        image.save(tf, format="JPEG")
+        tf.close()
+
+    yield tf
+
+    # clean up
+    image.close()
